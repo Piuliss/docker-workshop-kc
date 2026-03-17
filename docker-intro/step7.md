@@ -1,5 +1,8 @@
 # 7) Persistencia: volumes vs bind mounts
 
+## Objetivo
+Comparar volumen (gestionado por Docker) vs bind mount (carpeta del host) y cuándo usar cada uno.
+
 ## 7.1 Volumen (gestionado por Docker)
 ```bash
 docker volume create mi-vol
@@ -25,6 +28,10 @@ mkdir -p bindtest && echo "v1" > bindtest/app.txt
 ```bash
 docker container run --rm -v "$(pwd)/bindtest:/app" alpine:latest sh -c "ls -l /app && cat /app/app.txt"
 ```{{exec}}
+
+## ¿Qué deberías ver?
+- El archivo `hola.txt` persiste entre ejecuciones del contenedor cuando usas el volumen `mi-vol`.
+- En bind mount, lo que escribas en `bindtest/app.txt` se refleja al instante en el contenedor.
 
 ## ¿Qué debes poder explicar?
 - Volumen: mejor para datos “de runtime”

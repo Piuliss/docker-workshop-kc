@@ -1,5 +1,5 @@
 {
-  "title": "Taller Intro Docker (Containers → Compose → Swarm bonus)",
+  "title": "Taller Intro Docker FIUNI",
   "description": "Imágenes, contenedores, redes, volúmenes, Dockerfile básico, Docker Compose y demo rápida de Swarm.",
   "difficulty": "Beginner",
   "time": "150",
@@ -14,7 +14,8 @@
       { "title": "6) Networking: red custom + DNS por nombre", "text": "step6.md" },
       { "title": "7) Persistencia: volumes vs bind mounts", "text": "step7.md" },
       { "title": "8) Dockerfile: build de una web estática", "text": "step8.md" },
-      { "title": "9) Docker Compose (2 servicios) + Swarm (bonus)", "text": "step9.md" }
+      { "title": "9) Docker Compose (2 servicios) + Swarm (bonus)", "text": "step9.md" },
+      { "title": "10) Seguridad básica en contenedores (mini-lab)", "text": "step10.md" }
     ],
     "finish": { "text": "finish.md" }
   },

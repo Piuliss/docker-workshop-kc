@@ -7,6 +7,15 @@
 - `docker volume create/inspect`
 - `docker compose up/down/ps/logs`
 
+## Evidencias recomendadas (para entrega)
+- **Capturas o copy/paste** de:
+  - `docker image ls` (después de hacer build)
+  - `docker ps` (al menos 2 contenedores corriendo en algún punto)
+  - 1 `docker inspect ... --format ...` (red/puertos/IP)
+  - 1 prueba de red por DNS (curl a `http://srv`)
+  - `docker compose ps` y `docker compose logs --tail 20 web`
+- **Explicación breve** (5–10 líneas): qué problema resuelve cada concepto (red/volumen/compose).
+
 ## Mini-desafíos (10–15 min)
 1) Lanza `nginx` mapeando a otro puerto (ej. 8099) y demuestra con `inspect` qué IP interna tiene.  
 2) Crea una red custom y prueba DNS por nombre entre dos contenedores.  

@@ -1,6 +1,13 @@
 # 9) Docker Compose (2 servicios) + Swarm (BONUS)
 
 ## 9.1 Compose: Flask + Redis (contador)
+## Objetivo
+Levantar una app multi-servicio y comprobar comunicación por nombre de servicio (`redis`) y persistencia lógica (contador en Redis mientras el stack está arriba).
+
+## ¿Qué es cada servicio?
+- **Flask (web)**: micro-framework de Python para exponer un endpoint HTTP. Aquí sirve para ver una app “real” mínima.
+- **Redis**: base de datos en memoria tipo key-value. Aquí la usamos para guardar un contador (`hits`) compartido entre requests.
+
 ```bash
 mkdir -p compose-lab && cd compose-lab
 ```{{exec}}
@@ -34,8 +41,7 @@ r = Redis(host="redis", port=6379)
 @app.get("/")
 def home():
     n = r.incr("hits")
-    return f"Hits = {n}
-"
+    return f"Hits = {n}\n"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
@@ -57,7 +63,23 @@ Logs:
 docker compose -f compose.yml logs --tail 50 web
 ```{{exec}}
 
-> Abre el puerto **5000** en la UI de KillerCoda y recarga varias veces.
+## ¿Qué deberías ver?
+- `docker compose ps` muestra `web` y `redis` en **running**.
+- Al abrir la web, el contador **sube** en cada refresh.
+
+Abrir en el navegador:
+- `{{TRAFFIC_HOST1_5000}}`
+
+## Troubleshooting (rápido)
+Si `web` no responde o el contador no sube:
+
+```bash
+docker compose -f compose.yml ps
+docker compose -f compose.yml logs --tail 80 web
+docker compose -f compose.yml logs --tail 80 redis
+```{{exec}}
+
+Pista: si `web` no logra conectar, casi siempre verás errores de conexión a `redis` en los logs de `web` (nombre de servicio, orden de arranque, etc.).
 
 Bajar:
 ```bash

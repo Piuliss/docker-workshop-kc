@@ -1,5 +1,8 @@
 # 4) Entrar al contenedor: exec/attach + procesos
 
+## Objetivo
+Distinguir `run` vs `exec` y ver que un contenedor vive mientras su **PID 1** siga activo.
+
 Crear Alpine “vivo”:
 ```bash
 docker container run -dit --name a1 alpine:latest sh
@@ -20,6 +23,10 @@ whoami && uname -a
 ```{{exec}}
 
 Sal con `exit`.
+
+## ¿Qué deberías ver?
+- Dentro del contenedor, `ps` muestra al `sh` como PID 1 (o el primer proceso).
+- `docker logs` de `a1` normalmente estará vacío (no estás corriendo un servicio que loguee).
 
 ## Restart policy (concepto operativo)
 ```bash
