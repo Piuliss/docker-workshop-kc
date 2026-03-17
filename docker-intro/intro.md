@@ -1,4 +1,6 @@
-# Taller Introductorio de Docker (2h30)
+# Taller Introductorio de Docker 
+
+![Docker Workshop](docker-full.png)
 
 **Objetivo**: que puedas explicar y ejecutar con evidencia:
 - Imagen vs contenedor
@@ -17,7 +19,7 @@
 ## Reglas
 1) Copia/pega comandos, pero **lee el objetivo** antes de ejecutar.  
 2) Cada paso termina con “Ten en cuenta que…” con notas o tips importantes de Docker.  
-3) Al final hay mini-desafíos para evidencias.
+3) Al final tienes mini-desafíos opcionales para que **te auto-chequees**, no hay entregables.
 
 ## UI (KillerCoda)
 - Para abrir servicios HTTP, usa el selector de tráfico/puertos en la UI.
