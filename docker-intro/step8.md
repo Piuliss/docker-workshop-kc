@@ -108,6 +108,6 @@ Volver a raíz:
 cd ..
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- Qué hace `FROM` y `COPY`
-- Qué es el contexto de build (el `.`)
+## Ten en cuenta que…
+- `FROM` define la **imagen base** y `COPY` lleva tus archivos al sistema de archivos de la imagen.
+- El contexto de build (el `.`) es “todo lo que Docker puede ver” al hacer build; usarlo bien afecta rendimiento y seguridad.

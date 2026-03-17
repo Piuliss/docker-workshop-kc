@@ -26,7 +26,6 @@ docker container ls -a
 docker image ls
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- ¿Qué es Docker Engine?
-- Diferencia entre cliente y daemon
-- Qué significa “imagen” y “contenedor” (definición operacional)
+## Ten en cuenta que…
+- **Docker Engine** tiene un cliente (CLI) y un daemon (servidor); si el daemon no responde, `docker info` falla.
+- En este curso usamos “imagen” como **plantilla** y “contenedor” como **instancia en ejecución** de esa plantilla.

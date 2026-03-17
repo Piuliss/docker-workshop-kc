@@ -133,6 +133,6 @@ Volver:
 cd ..
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- Compose: describe una app multi-servicio local (y más)
-- Swarm: modelo declarativo de servicios (replicas, update, rollback)
+## Ten en cuenta que…
+- Compose te permite definir una app multi-servicio como **código** (YAML) y recrearla en segundos.
+- Swarm usa un modelo **declarativo de servicios** (réplicas, actualizaciones, rollback) similar a orquestadores más grandes como Kubernetes.

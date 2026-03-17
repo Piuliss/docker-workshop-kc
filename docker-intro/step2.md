@@ -33,6 +33,6 @@ docker image history nginx:latest
 - `docker image ls` muestra `alpine` y `nginx`.
 - `docker image history nginx:latest` lista varias capas (no es un solo blob).
 
-## ¿Qué debes poder explicar?
-- Qué es un tag (`:latest` no es “la última versión garantizada”)
-- Qué representa `history` (capas)
+## Ten en cuenta que…
+- Un **tag** (como `:latest`) es solo una **etiqueta**, no garantiza “la versión más nueva”.
+- `docker image history` te muestra las **capas** (instrucciones de Dockerfile); es clave para entender tamaño y seguridad.

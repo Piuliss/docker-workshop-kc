@@ -33,6 +33,6 @@ docker container run --rm -v "$(pwd)/bindtest:/app" alpine:latest sh -c "ls -l /
 - El archivo `hola.txt` persiste entre ejecuciones del contenedor cuando usas el volumen `mi-vol`.
 - En bind mount, lo que escribas en `bindtest/app.txt` se refleja al instante en el contenedor.
 
-## ¿Qué debes poder explicar?
-- Volumen: mejor para datos “de runtime”
-- Bind: mejor para desarrollo (edito en host, se refleja en contenedor)
+## Ten en cuenta que…
+- Los **volúmenes** son ideales para datos de **runtime** (bases de datos, uploads, etc.) gestionados por Docker.
+- Los **bind mounts** brillan en desarrollo: editas en tu máquina y ves el cambio inmediato dentro del contenedor.

@@ -50,6 +50,6 @@ Limpieza:
 docker container rm -f a1
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- `exec` entra a un contenedor existente; `run` crea uno nuevo
-- `--restart` y por qué importa en servicios
+## Ten en cuenta que…
+- `docker container run` **crea** y lanza contenedores nuevos; `docker container exec` entra a uno que ya existe.
+- Las políticas `--restart` son críticas en producción: definen si tu servicio se levanta solo después de un fallo o reboot.

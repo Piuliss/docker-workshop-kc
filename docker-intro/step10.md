@@ -53,9 +53,9 @@ Limpieza:
 docker container rm -f limited
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- Por qué **no-root** reduce impacto (aunque no es bala de plata).
-- Qué cambia con `--read-only` y por qué `tmpfs` es un patrón común.
-- Qué son capabilities (alto nivel) y por qué `--cap-drop=ALL` es una base sana.
-- Cómo los límites de CPU/Mem ayudan a estabilidad y seguridad.
+## Ten en cuenta que…
+- Ejecutar contenedores **sin root** reduce el impacto de muchas vulnerabilidades (aunque no es suficiente por sí solo).
+- `--read-only` obliga a pensar **dónde** realmente necesitas escribir, y `tmpfs` es un patrón seguro para directorios temporales.
+- Las capabilities son permisos finos del kernel; `--cap-drop=ALL` y volver a agregar solo las necesarias es una buena base.
+- Limitar CPU/RAM ayuda tanto a **seguridad** (evitar DoS) como a **multi-tenant** (que un contenedor no ahogue al resto).
 

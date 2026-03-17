@@ -43,6 +43,6 @@ docker container stop web
 docker container rm web
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- `-d`, `--rm`, `-p HOST:CONT`
-- Por qué un contenedor “muere” si el proceso PID 1 termina
+## Ten en cuenta que…
+- `-d` lanza en **background**, `--rm` hace limpieza automática cuando termina, y `-p HOST:CONT` publica puertos.
+- Si el **PID 1** (proceso principal del contenedor) termina, el contenedor se da por “muerto” aunque otros procesos sigan.

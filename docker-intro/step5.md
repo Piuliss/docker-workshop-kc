@@ -40,7 +40,7 @@ Limpieza:
 docker container rm -f web
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- Qué es `inspect` (fuente de verdad)
-- Qué muestra `diff` (RW layer)
-- Para qué sirve `cp` en IR/forense básica
+## Ten en cuenta que…
+- `docker container inspect` es la **fuente de verdad**: todo lo que la CLI hace, sale de ahí.
+- `docker container diff` te enseña qué cambió en la **capa RW** del contenedor (muy útil en forense/debugging).
+- `docker container cp` permite sacar evidencia o configs del contenedor al host sin abrir puertos extra.

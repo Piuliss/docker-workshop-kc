@@ -44,6 +44,6 @@ docker container rm -f srv
 docker network rm labnet
 ```{{exec}}
 
-## ¿Qué debes poder explicar?
-- Por qué una red custom habilita DNS por nombre de contenedor
-- Diferencia conceptual con `bridge` default
+## Ten en cuenta que…
+- Las redes **custom bridge** habilitan resolución por **nombre de contenedor**, la `bridge` default no.
+- Pensar en DNS por nombre te prepara para Compose, Swarm y Kubernetes (donde casi nunca apuntas por IP).

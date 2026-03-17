@@ -16,7 +16,7 @@
 
 ## Reglas
 1) Copia/pega comandos, pero **lee el objetivo** antes de ejecutar.  
-2) Cada paso tiene un “¿Qué debes poder explicar?”.  
+2) Cada paso termina con “Ten en cuenta que…” con notas o tips importantes de Docker.  
 3) Al final hay mini-desafíos para evidencias.
 
 ## UI (KillerCoda)
