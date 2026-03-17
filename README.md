@@ -14,14 +14,16 @@ Este repositorio contiene un **laboratorio tipo KillerCoda** (paso a paso) para 
 - **Bonus**: Docker Swarm (service/scale/update)
 
 ## Estructura (KillerCoda)
-- `index.json`
-- `intro.md`
-- `step1.md` … `step9.md`
-- `finish.md`
+- `structure.json`
+- `docker-intro/`
+  - `index.json`
+  - `intro.md`
+  - `step1.md` … `step9.md`
+  - `finish.md`
 
 ## Uso
-1. Crea un escenario en [KillerCoda](https://killercoda.com) (modo Creator).
-2. Sube o copia/pega los archivos de este repo.
+1. Conecta este repo desde [KillerCoda](https://killercoda.com) (modo Creator / GitHub import).
+2. Asegúrate de que el escenario detectado sea `docker-intro`.
 3. Publica y comparte el link con los alumnos.
 
 ## Nota
