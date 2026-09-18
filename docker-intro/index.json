@@ -1,6 +1,6 @@
 {
   "title": "Taller Intro Docker FIUNI",
-  "description": "Imágenes, contenedores, redes, volúmenes, Dockerfile, multi-stage, Compose (WordPress+MariaDB) y demo de Swarm.",
+  "description": "Clase 1: imágenes, contenedores, redes, volúmenes y primera mirada a Compose (WordPress+MariaDB). Clase 2: Dockerfile, multi-stage, Compose a fondo (backup/restore), Swarm y seguridad.",
   "difficulty": "Beginner",
   "time": "180",
   "details": {
@@ -13,9 +13,11 @@
       { "title": "5) Inspección: inspect, diff, cp, stats", "text": "step5.md" },
       { "title": "6) Networking: red custom + DNS por nombre", "text": "step6.md" },
       { "title": "7) Persistencia: volumes vs bind mounts", "text": "step7.md" },
+      { "title": "7b) Compose: WordPress + MariaDB (primera mirada — Clase 1)", "text": "step7b.md" },
+      { "title": "7c) Cierre Parte 1 + mini-quiz (sin comandos)", "text": "step7c.md" },
       { "title": "8) Dockerfile: build de una web estática", "text": "step8.md" },
       { "title": "8b) Multi-stage + .dockerignore + USER", "text": "step8b.md" },
-      { "title": "9) Compose: WordPress + MariaDB (backup/restore)", "text": "step9.md" },
+      { "title": "9) Compose: WordPress + MariaDB (backup/restore) — Clase 2", "text": "step9.md" },
       { "title": "10) Swarm: demo de orquestación (BONUS)", "text": "step10.md" },
       { "title": "11) Seguridad básica en contenedores (mini-lab)", "text": "step11.md" }
     ],

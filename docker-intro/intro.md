@@ -1,6 +1,6 @@
 # Taller Introductorio de Docker 
 
-![Docker Workshop](docker-full.png)
+![Docker Workshop](https://raw.githubusercontent.com/Piuliss/docker-workshop-kc/main/docker-intro/docker-full.png)
 
 **Objetivo**: que puedas explicar y ejecutar con evidencia:
 - Imagen vs contenedor
