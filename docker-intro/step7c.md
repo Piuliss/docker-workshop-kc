@@ -43,10 +43,11 @@ shell de KC, que se cierra solo).
 
 Si querés llegar con más soltura a la Parte 2:
 
-1. Releé `parte-1-fundamentos/cheatsheet.md` (1 página).
+1. **Releé la hoja de comandos** (cheatsheet) que te pasó el docente. Si no la
+   tenés, pedila antes de irte — la vas a usar toda la Parte 2.
 2. Corré los 5 comandos del recap en tu sesión de KC — sin mirar la guía.
-3. Si te pinta, explorá el desafío de casa: `docker-workshop/desafio-casa.md`
-   (OWASP Juice Shop — **exploración libre**, no exploiting).
+3. Si te pinta, explorá **KC step 7b** (Compose WordPress+MariaDB light).
+   Es el anticipo de la Parte 2.
 
 ## Mini-quiz oral (cuando estés listo)
 
