@@ -1,8 +1,8 @@
 {
   "title": "Taller Intro Docker FIUNI",
-  "description": "Imágenes, contenedores, redes, volúmenes, Dockerfile básico, Docker Compose y demo rápida de Swarm.",
+  "description": "Imágenes, contenedores, redes, volúmenes, Dockerfile, multi-stage, Compose (WordPress+MariaDB) y demo de Swarm.",
   "difficulty": "Beginner",
-  "time": "150",
+  "time": "180",
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
@@ -14,8 +14,10 @@
       { "title": "6) Networking: red custom + DNS por nombre", "text": "step6.md" },
       { "title": "7) Persistencia: volumes vs bind mounts", "text": "step7.md" },
       { "title": "8) Dockerfile: build de una web estática", "text": "step8.md" },
-      { "title": "9) Docker Compose (2 servicios) + Swarm (bonus)", "text": "step9.md" },
-      { "title": "10) Seguridad básica en contenedores (mini-lab)", "text": "step10.md" }
+      { "title": "8b) Multi-stage + .dockerignore + USER", "text": "step8b.md" },
+      { "title": "9) Compose: WordPress + MariaDB (backup/restore)", "text": "step9.md" },
+      { "title": "10) Swarm: demo de orquestación (BONUS)", "text": "step10.md" },
+      { "title": "11) Seguridad básica en contenedores (mini-lab)", "text": "step11.md" }
     ],
     "finish": { "text": "finish.md" }
   },

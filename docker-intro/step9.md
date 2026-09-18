@@ -1,50 +1,52 @@
-# 9) Docker Compose (2 servicios) + Swarm (BONUS)
+# 9) Compose: WordPress + MariaDB (backup/restore)
 
-## 9.1 Compose: Flask + Redis (contador)
 ## Objetivo
-Levantar una app multi-servicio y comprobar comunicación por nombre de servicio (`redis`) y persistencia lógica (contador en Redis mientras el stack está arriba).
+Levantar una app multi-servicio **real** (WordPress + MariaDB) con Compose,
+configurar persistencia con volúmenes, hacer backup de la DB con `mysqldump`
+desde `docker exec`, destruir todo con `down -v`, y restaurar el backup.
 
-## ¿Qué es cada servicio?
-- **Flask (web)**: micro-framework de Python para exponer un endpoint HTTP. Aquí sirve para ver una app “real” mínima.
-- **Redis**: base de datos en memoria tipo key-value. Aquí la usamos para guardar un contador (`hits`) compartido entre requests.
+> **¿Por qué WordPress y no otra cosa?**
+> Es la combinación canónica: una app web (PHP) + una base de datos (SQL).
+> El 90% de las apps tienen esta forma (Ghost, Discourse, Moodle, Shopify…).
+> La escala la pone el orquestador, no el patrón.
 
 ```bash
-mkdir -p compose-lab && cd compose-lab
+mkdir -p wp-lab && cd wp-lab
 ```{{exec}}
 
 ```bash
 cat > compose.yml << 'EOF'
 services:
-  web:
-    image: python:3.11-alpine
-    working_dir: /app
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpw
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wppw
     volumes:
-      - .:/app
-    ports:
-      - "5000:5000"
-    command: sh -c "pip install -q flask redis && python app.py"
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  wordpress:
+    image: wordpress:6-apache
     depends_on:
-      - redis
-  redis:
-    image: redis:alpine
-EOF
-```{{exec}}
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wppw
+      WORDPRESS_DB_NAME: wordpress
 
-```bash
-cat > app.py << 'EOF'
-from flask import Flask
-from redis import Redis
-
-app = Flask(__name__)
-r = Redis(host="redis", port=6379)
-
-@app.get("/")
-def home():
-    n = r.incr("hits")
-    return f"Hits = {n}\n"
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+volumes:
+  dbdata:
 EOF
 ```{{exec}}
 
@@ -58,81 +60,60 @@ Estado:
 docker compose -f compose.yml ps
 ```{{exec}}
 
-Logs:
+## Acceder a WordPress
+Abrí la URL del puerto 8000 en KC. Completá el wizard:
+- Idioma: español
+- Título: el que quieras
+- Usuario: `admin` / pass: lo que quieras (anotalá)
+
+## Crear un post de prueba
+Posts → Añadir nuevo → "Post de prueba del taller" → Publicar.
+
+## Backup
 ```bash
-docker compose -f compose.yml logs --tail 50 web
+docker compose -f compose.yml exec db \
+  sh -c 'exec mariadb-dump -uwp -pwppw wordpress' > backup.sql
 ```{{exec}}
 
-## ¿Qué deberías ver?
-- `docker compose ps` muestra `web` y `redis` en **running**.
-- Al abrir la web, el contador **sube** en cada refresh.
-
-Abrir en el navegador:
-- `{{TRAFFIC_HOST1_5000}}`
-
-## Troubleshooting (rápido)
-Si `web` no responde o el contador no sube:
-
 ```bash
-docker compose -f compose.yml ps
-docker compose -f compose.yml logs --tail 80 web
-docker compose -f compose.yml logs --tail 80 redis
+ls -lh backup.sql
 ```{{exec}}
 
-Pista: si `web` no logra conectar, casi siempre verás errores de conexión a `redis` en los logs de `web` (nombre de servicio, orden de arranque, etc.).
-
-Bajar:
+## Destruir todo (simula un desastre)
 ```bash
 docker compose -f compose.yml down -v
 ```{{exec}}
 
-## 9.2 BONUS: Swarm en 1 nodo (services/stack/scale)
-> Si el tiempo alcanza: esto es demo. En 1 nodo igual sirve para ver el modelo.
+> `-v` borra los volúmenes. **La DB se perdió**.
 
-Init:
+## Recrear y restaurar
 ```bash
-docker swarm init
+docker compose -f compose.yml up -d
 ```{{exec}}
 
-Crear un servicio web replicado:
+Esperá a que termine. El wizard vuelve a aparecer.
+
+Restaurá el backup:
 ```bash
-docker service create --name websvc -p 8088:80 --replicas 3 nginx:alpine
+cat backup.sql | docker compose -f compose.yml exec -T db \
+  mariadb -uwp -pwppw wordpress
 ```{{exec}}
 
-Ver servicios y tareas:
-```bash
-docker service ls
-```{{exec}}
+Refrescá `http://<KC-puerto-8000>`. **El post "Post de prueba del taller"
+debería estar ahí**.
 
+Limpieza:
 ```bash
-docker service ps websvc
-```{{exec}}
-
-Escalar:
-```bash
-docker service scale websvc=5
-```{{exec}}
-
-Actualizar imagen (rolling update):
-```bash
-docker service update --image nginx:latest websvc
-```{{exec}}
-
-Borrar servicio:
-```bash
-docker service rm websvc
-```{{exec}}
-
-Salir de swarm:
-```bash
-docker swarm leave --force
-```{{exec}}
-
-Volver:
-```bash
+docker compose -f compose.yml down -v
 cd ..
 ```{{exec}}
 
+## ¿Qué deberías ver?
+- Después del restore, el post original está vivo.
+- Sin el backup, hubieras perdido todo al hacer `down -v`.
+
 ## Ten en cuenta que…
-- Compose te permite definir una app multi-servicio como **código** (YAML) y recrearla en segundos.
-- Swarm usa un modelo **declarativo de servicios** (réplicas, actualizaciones, rollback) similar a orquestadores más grandes como Kubernetes.
+- En producción los backups se automatizan; el patrón `mysqldump` se reemplaza
+  por backups incrementales o snapshots del volumen.
+- **El secreto está en el volumen**: sin volumen ni backup, un `down -v`
+  destruye todo. Cualquiera de los dos te salva.
