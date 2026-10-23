@@ -32,7 +32,7 @@ Si tenés **5 de 6**, estás listo para la Parte 2.
 Si todavía tenés algo corriendo del Compose light (step 7b), limpialo:
 
 ```bash
-docker compose -f wp-lab/compose.yml down -v 2>/dev/null || true
+docker-compose -f wp-lab/compose.yml down -v 2>/dev/null || true
 docker container ls -a
 ```{{exec}}
 

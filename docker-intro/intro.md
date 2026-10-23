@@ -12,9 +12,14 @@
 - **Bonus**: Swarm en 1 nodo (services/stack/scale)
 
 ## ¿Cómo usar este taller?
-- **Modo recomendado**: ejecuta cada bloque y valida el “qué deberías ver” antes de seguir.
-- **Si algo falla**: vuelve a correr el comando, revisa el error, y usa `docker logs` / `docker ps -a` / `docker inspect` como “fuente de verdad”.
-- **Ritmo sugerido**: pasos 1–7 (75–90 min), Dockerfile (20 min), Compose (25 min), Swarm bonus (10–15 min).
+- **Paso 0 (obligatorio)**: la imagen base del laboratorio trae Docker pero **no**
+  el plugin de Compose. Corré el **step 0** al empezar (~30 s): instala el binario
+  `docker-compose` y verifica que funcione. Después de eso, todos los comandos de
+  Compose del taller van como **`docker-compose`** (con guion) — es el mismo
+  motor Compose V2, invocado de forma standalone.
+- **Modo recomendado**: ejecuta cada bloque y valida el "qué deberías ver" antes de seguir.
+- **Si algo falla**: vuelve a correr el comando, revisa el error, y usa `docker logs` / `docker ps -a` / `docker inspect` como "fuente de verdad".
+- **Ritmo sugerido**: paso 0 (1 min), pasos 1–7 (75–90 min), Dockerfile (20 min), Compose (25 min), Swarm bonus (10–15 min).
 
 ## Reglas
 1) Copia/pega comandos, pero **lee el objetivo** antes de ejecutar.  

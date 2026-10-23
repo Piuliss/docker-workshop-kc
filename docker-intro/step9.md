@@ -5,6 +5,11 @@ Levantar una app multi-servicio **real** (WordPress + MariaDB) con Compose,
 configurar persistencia con volúmenes, hacer backup de la DB con `mysqldump`
 desde `docker exec`, destruir todo con `down -v`, y restaurar el backup.
 
+> **Prerrequisito:** corré el **step 0** primero (ahí se instala Docker Compose).
+> Acá los comandos van como `docker-compose` **con guion**: es el mismo motor
+> Compose V2, pero standalone, porque la imagen base del laboratorio no trae el
+> plugin `docker compose` del CLI.
+
 > **¿Por qué WordPress y no otra cosa?**
 > Es la combinación canónica: una app web (PHP) + una base de datos (SQL).
 > El 90% de las apps tienen esta forma (Ghost, Discourse, Moodle, Shopify…).
@@ -52,12 +57,12 @@ EOF
 
 Levantar:
 ```bash
-docker compose -f compose.yml up -d
+docker-compose -f compose.yml up -d
 ```{{exec}}
 
 Estado:
 ```bash
-docker compose -f compose.yml ps
+docker-compose -f compose.yml ps
 ```{{exec}}
 
 ## Acceder a WordPress
@@ -71,7 +76,7 @@ Posts → Añadir nuevo → "Post de prueba del taller" → Publicar.
 
 ## Backup
 ```bash
-docker compose -f compose.yml exec db \
+docker-compose -f compose.yml exec db \
   sh -c 'exec mariadb-dump -uwp -pwppw wordpress' > backup.sql
 ```{{exec}}
 
@@ -81,21 +86,21 @@ ls -lh backup.sql
 
 ## Destruir todo (simula un desastre)
 ```bash
-docker compose -f compose.yml down -v
+docker-compose -f compose.yml down -v
 ```{{exec}}
 
 > `-v` borra los volúmenes. **La DB se perdió**.
 
 ## Recrear y restaurar
 ```bash
-docker compose -f compose.yml up -d
+docker-compose -f compose.yml up -d
 ```{{exec}}
 
 Esperá a que termine. El wizard vuelve a aparecer.
 
 Restaurá el backup:
 ```bash
-cat backup.sql | docker compose -f compose.yml exec -T db \
+cat backup.sql | docker-compose -f compose.yml exec -T db \
   mariadb -uwp -pwppw wordpress
 ```{{exec}}
 
@@ -104,7 +109,7 @@ debería estar ahí**.
 
 Limpieza:
 ```bash
-docker compose -f compose.yml down -v
+docker-compose -f compose.yml down -v
 cd ..
 ```{{exec}}
 

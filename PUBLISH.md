@@ -70,8 +70,18 @@ Para validar que KC cargó todo:
 # Abrir cada step en el browser y verificar que el primer comando se puede ejecutar
 ```
 
+Checklist mínimo antes de compartir el link con los alumnos:
+
+1. **step 0** — correr el bloque de instalación. Debe terminar con
+   `docker-compose version` → `Docker Compose version v2.x`. Si el `curl` falla
+   por DNS, el entorno no tiene salida a internet y hay que resolver eso antes.
+2. **step 7b** — `docker-compose -f compose.yml ps` debe listar `db` y
+   `wordpress` en `healthy`.
+3. **step 9** — `docker-compose -f compose.yml logs --tail 5 db` no debe dar
+   error.
+
 Si algún step falla al cargar, revisar:
-- Que `docker-intro/index.json` referencie archivos que existen (ej: `step8b.md`)
+- Que `docker-intro/index.json` referencie archivos que existen (ej: `step8b.md`, `step0.md`)
 - Que la sintaxis `{{exec}}` esté en cada bloque de código que querés ejecutable
 
 ## Actualizar el escenario después

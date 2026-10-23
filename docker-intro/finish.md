@@ -5,7 +5,7 @@
 - `docker container run/ls/logs/exec/inspect/diff/cp/stats`
 - `docker network create/inspect`
 - `docker volume create/inspect`
-- `docker compose up/down/ps/logs`
+- `docker-compose up/down/ps/logs` (mismo motor que `docker compose`)
 
 ## Mini-desafíos (10–15 min)
 1) Lanza `nginx` mapeando a otro puerto (ej. 8099) y demuestra con `inspect` qué IP interna tiene.  

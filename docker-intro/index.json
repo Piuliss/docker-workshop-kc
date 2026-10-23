@@ -6,6 +6,7 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
+      { "title": "0) Requisito: instalar Docker Compose", "text": "step0.md" },
       { "title": "1) Verificar entorno + reglas del juego", "text": "step1.md" },
       { "title": "2) Imágenes: pull, ls, history", "text": "step2.md" },
       { "title": "3) Contenedores: run/ps/logs/stop/rm", "text": "step3.md" },

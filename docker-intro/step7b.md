@@ -11,6 +11,11 @@ restore. La versión completa (con backup, `down -v`, restore) se ve en la
 > El 90% de las apps tienen esta forma (Ghost, Discourse, Moodle, Shopify…).
 > Lo que hoy te parece "mucho stack" mañana es el piso de cualquier deploy.
 
+> **Prerrequisito:** corré el **step 0** primero (ahí se instala Docker Compose).
+> Acá los comandos van como `docker-compose` **con guion**: es el mismo motor
+> Compose V2, pero standalone, porque la imagen base del laboratorio no trae el
+> plugin `docker compose` del CLI.
+
 ## Crear el proyecto
 
 ```bash
@@ -58,13 +63,13 @@ EOF
 ## Levantar el stack
 
 ```bash
-docker compose -f compose.yml up -d
+docker-compose -f compose.yml up -d
 ```{{exec}}
 
 Estado:
 
 ```bash
-docker compose -f compose.yml ps
+docker-compose -f compose.yml ps
 ```{{exec}}
 
 ## Acceder a WordPress
@@ -82,16 +87,16 @@ Posts → Añadir nuevo → "Post de prueba de la Parte 1" → Publicar.
 
 - WordPress responde en `localhost:8000` con el wizard de instalación.
 - Tras completar el wizard y publicar un post, lo ves en la home.
-- `docker compose ps` muestra **2 servicios healthy**: `db` y `wordpress`.
+- `docker-compose ps` muestra **2 servicios healthy**: `db` y `wordpress`.
 
 ## Inspección rápida (qué te llevás a casa)
 
 ```bash
-docker compose -f compose.yml logs --tail 20 db
+docker-compose -f compose.yml logs --tail 20 db
 ```{{exec}}
 
 ```bash
-docker compose -f compose.yml logs --tail 20 wordpress
+docker-compose -f compose.yml logs --tail 20 wordpress
 ```{{exec}}
 
 Mirá cómo WordPress loguea conexiones a la DB y la DB loguea queries. **Dos
@@ -100,7 +105,7 @@ procesos cooperando en una red custom**, administrados por un solo `compose.yml`
 ## Limpieza (importante antes de la Parte 2)
 
 ```bash
-docker compose -f compose.yml down -v
+docker-compose -f compose.yml down -v
 ```{{exec}}
 
 > `-v` borra el volumen `dbdata`. El próximo step de KC (7c) te lo recuerda.
